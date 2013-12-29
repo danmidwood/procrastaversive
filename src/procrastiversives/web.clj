@@ -16,15 +16,16 @@
 (def scary-words '("spider"
                    "tarantula"
                    "Trypophobia"
-                   "snake venomous"))
+                   "snake%20venomous"))
 
 (defn pick-url []
-  (format "https://www.google.com/search?q=%s&tbm=isch" (rand-nth scary-words)))
+  (format "https://www.google.com/search?q=%s&tbm=isch&tbs=itp:photo"
+          (rand-nth scary-words)))
 
 (defroutes app-routes
   (GET "/*"
        {:keys [headers] :as request}
-       (log/debug headers)
+       (log/debug request)
        (let [desired (headers "host")]
          (build-redirect-page desired (pick-url))
 ))
