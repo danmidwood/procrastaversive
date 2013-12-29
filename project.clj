@@ -8,12 +8,10 @@
                  [ring "1.2.0"]
                  [ring/ring-jetty-adapter "1.2.0"]
                  [compojure "1.1.5"]
-                 [com.cemerick/friend "0.1.5"]
                  [environ "0.4.0"]
                  [cornet "0.1.0"]
                  [com.taoensso/timbre "2.6.3"]
-                 [korma "0.3.0-RC6"]
-                 [postgresql/postgresql "9.1-901.jdbc4"]]
+                 [clj-time "0.6.0"]]
   :profiles {:dev {:dependencies [[ring-server "0.3.0"]]
                    :source-paths ["src-dev"]}
              :production {:env {:production true}}}
