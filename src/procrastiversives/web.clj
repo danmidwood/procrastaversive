@@ -22,17 +22,22 @@
   (format "https://www.google.com/search?q=%s&tbm=isch&tbs=itp:photo"
           (rand-nth scary-words)))
 
+(html/deftemplate home-page "procrastiversives/index.html" [])
+
+
 (defroutes app-routes
   (GET "/*"
        {:keys [headers] :as request}
        (log/debug request)
        (let [desired (headers "host")]
-         (build-redirect-page desired (pick-url))
-))
+         (when ((comp not =) desired "localhost")
+           (build-redirect-page desired (pick-url)))))
 
-  (GET "/*"
+  (GET "/"
        {:keys [headers] :as request}
-       "default scare page"))
+       (home-page)
+;       "default scare page"
+       ))
 
 (defroutes cornet
   (croute/wrap-url-response
