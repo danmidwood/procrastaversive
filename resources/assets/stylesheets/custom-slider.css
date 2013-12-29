@@ -1,0 +1,53 @@
+.btn-group {
+    float: right;
+}
+
+.question {
+    left: -210px; /* ~ width of popup minus width of button. Gives alignment on the right edges */
+}
+
+.question label {
+    display: inline;
+}
+
+.ui-slider {
+    margin: 0 10px;
+    position: relative;
+    text-align: left;
+    background-image: linear-gradient(to right, #14690E 0%, #A30E04 100%);
+}
+
+.ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 0.8em;
+    height: 0.8em;
+    cursor: default;
+}
+
+.ui-slider .ui-slider-range {
+    position: absolute;
+    z-index: 1;
+    font-size: .7em;
+    display: block;
+    border: 0;
+    background-position: 0 0;
+}
+
+.ui-slider-horizontal {
+    height: 0.5em;
+}
+.ui-slider-horizontal .ui-slider-handle {
+    top: -0.2em;
+    margin-left: -0.4em;
+}
+.ui-slider-horizontal .ui-slider-range {
+    top: 0;
+    height: 100%;
+}
+.ui-slider-horizontal .ui-slider-range-min {
+    left: 1em;
+}
+.ui-slider-horizontal .ui-slider-range-max {
+    right: 0;
+}

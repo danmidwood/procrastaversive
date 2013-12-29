@@ -40,7 +40,8 @@
   (format "https://www.google.com/search?q=%s&tbm=isch&tbs=itp:photo"
           (rand-nth (flatten (map scary-words levels)))))
 
-(html/deftemplate home-page "procrastiversives/index.html" [])
+(html/deftemplate home-page "procrastiversives/index.html" [level]
+  [[:input (html/attr-has :value level)]] (html/set-attr "checked" "checked"))
 
 
 (defroutes app-routes
@@ -60,18 +61,14 @@
          (when (and ((comp not =) host "localhost")
                     ((comp not =) host "procrastiversives.co"))
            (rresponse/redirect (str "http://localhost?d=" host path)))))
-
-  (GET "/" request
-       (home-page))
-  (GET "/level" {:keys [cookies] :as request}
-       (log/debug cookies)
-       (let [level (-> (cookies "level")
-                       :value)]
-         (rresponse/response level)))
-  (GET "/level/:level" [level]
+  (GET "/"  {:keys [cookies]}
+         (let [level (or (:value (cookies "level"))
+                         "mild")]
+           (home-page level)))
+  (POST "/level" {:keys [params]}
         (assoc (rresponse/redirect "/")
           :cookies
-          {:level {:value level
+          {:level {:value (params :level)
                    :path "/"
                    :expires (time/plus (time/now) (time/years 10))}})))
 

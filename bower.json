@@ -2,6 +2,8 @@
     "name": "procrastiversives",
     "version": "0.1.0-SNAPSHOT",
     "dependencies": {
-        "react": "0.8.0"
+      "jquery" : "1.8.2",
+      "jquery-ui": "1.10.3",
+      "bootstrap": "2.3.0"
     }
 }

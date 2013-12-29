@@ -12,10 +12,20 @@
 
     <!-- Stylesheets -->
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+
+    <script src="js/lib/jquery/jquery.js"></script>
+    <script src="js/lib/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="js/lib/jquery-ui/ui/jquery.ui.slider.js"></script>
+    <script src="js/lib/bootstrap/js/bootstrap-dropdown.js"></script>
+
+
+
     <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css" media="screen">
 
     <link rel="stylesheet" href="stylesheets/styles.css" type="text/css" media="screen">
     <link rel="stylesheet" href="stylesheets/sub-theme-dark.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/overcast/jquery-ui.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/custom-slider.css" type="text/css" media="screen">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if IE]>
@@ -32,8 +42,53 @@
       <nav>
         <div class="container">
           <a href="#" class="brand">Procrastination Aversives</a>
+          <div id="form-container" class="btn-group open">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              Level Up <span class="caret"></span>
+            </button>
+            <form class="question span4 dropdown-menu" role="menu" name="level_selection" action="/level" method="POST">
+              <label><input type="radio" name="level" value="mild">Mild</label>
+              <label><input type="radio" name="level" value="scary">Scary</label>
+              <label><input type="radio" name="level" value="extreme">Extreme</label>
+              <label><input type="radio" name="level" value="goatse">Goatse</label>
+              <input type="submit" value="Update">
+            </form>
+          </div>
         </div>
       </nav>
+
+      <script>
+        $("#form-container").removeClass("open");
+        $(".question").each(function() {
+          $(this).children().hide();
+
+          var radios = $(this).find(":radio");
+          var selected = radios.filter(function(idx,r) {
+            return r.checked;})[0].value;
+
+          $("<p>Punishment level: <span id=\"level\">" + selected + "</span></p>").appendTo(this);
+
+
+
+          $("<div></div>").slider({
+            min: 0,
+            max: radios.length - 1,
+            value: radios.index($(".question").find(":radio:checked")),
+            slide: function(event, ui) {
+              var selected_value = radios[ui.value].value;
+              $("#level").text(selected_value);
+              radios[ui.value].click();
+              var exdate=new Date();
+              exdate.setDate(exdate.getDate() + (365 * 10));
+              var c_value=escape(selected_value) +
+              ((exdate==null) ? "" : ("; expires="+exdate.toUTCString()));
+              document.cookie="level" + "=" + c_value;
+            }}).appendTo(this);
+        })
+        $('.dropdown-menu input, .dropdown-menu label').click(function(e) {
+          e.stopPropagation();
+        });;
+      </script>
 
       <section class="container">
         <h1>Painfully break your dependency on bad websites</h1>
@@ -100,7 +155,7 @@
     <footer>
       <p>Made with  <i class="foundicon-heart"></i> by Dan Midwood. Copyright © 2013.</p>
       <div class="container">
-        Look at my,
+        Take a look at my
         <ul class="row-fluid">
           <li>
             <a href="http://danmidwood.com">Blog</a>
