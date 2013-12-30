@@ -9,7 +9,6 @@
                  [ring/ring-jetty-adapter "1.2.0"]
                  [compojure "1.1.5"]
                  [environ "0.4.0"]
-                 [cornet "0.1.0"]
                  [com.taoensso/timbre "2.6.3"]
                  [clj-time "0.6.0"]]
   :profiles {:dev {:dependencies [[ring-server "0.3.0"]]

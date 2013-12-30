@@ -6,8 +6,6 @@
             [ring.middleware.reload :as rreload]
             [ring.middleware.cookies :as cookie]
             [net.cgrand.enlive-html :as html]
-            [cornet.core :as cornet]
-            [cornet.route :as croute]
             [taoensso.timbre :as log]
             [clj-time.core :as time]
             [procrastiversives.punishment :as p]))
@@ -47,13 +45,8 @@
 
 
 
-(defroutes cornet
-  (croute/wrap-url-response
-   (some-fn
-    (cornet/static-assets-loader "assets"
-                                 :from-filesystem false
-                                 :mode :prod)))
-
+(defroutes resources
+  (route/resources "/" {:root "assets"})
   (route/not-found "Not Found"))
 
 (defn log-exceptions [f]
@@ -64,7 +57,7 @@
         (throw e)))))
 
 (def app
-  (-> (routes app-routes cornet)
+  (-> (routes app-routes resources)
       (handler/site)
       (log-exceptions)
       (rreload/wrap-reload '())))
