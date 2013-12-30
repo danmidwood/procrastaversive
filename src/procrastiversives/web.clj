@@ -31,7 +31,7 @@
              path (request :uri)]
          (when (and ((comp not =) host "localhost")
                     ((comp not =) host "procrastaversive.com"))
-           (rresponse/redirect (str "http://procrastaversive?d=" host path)))))
+           (rresponse/redirect (str "http://procrastaversive.com?d=" host path)))))
   (GET "/"  {:keys [cookies]}
          (let [level (or (:value (cookies "level"))
                          "mild")]
