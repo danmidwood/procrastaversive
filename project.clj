@@ -1,4 +1,4 @@
-(defproject procrastiversives "0.1.1-SNAPSHOT"
+(defproject procrastiversives "0.1.1"
   :description "Punishing procrastination"
   :url "http://procrastiversives"
   :license {:name "Eclipse Public License"
