@@ -18,7 +18,9 @@
   :plugins [[lein-ring "0.8.3"]
             [environ/environ.lein "0.2.1"]
             [s3-wagon-private "1.1.2"]
-            [org.clojars.wokier/lein-bower "0.3.0"]]
+            [org.clojars.wokier/lein-bower "0.3.0"]
+            [rplevy/lein-deploy-app "0.2.1"]]
+  :deploy-app {:s3-bucket "s3p://jvm-apps/releases/" :creds :env}
   :deploy-repositories [["snapshots" {:url "s3p://jvm-repository/snapshots/"
                                       :creds :gpg}]
                         ["releases" {:url "s3p://jvm-repository/releases/"
