@@ -54,3 +54,4 @@ pom.xml
 ### bower
 /node_modules
 resources/assets/js/lib
+pom.xml.asc
