@@ -21,7 +21,7 @@
             [org.clojars.wokier/lein-bower "0.3.0"]]
   :deploy-repositories [["snapshots" {:url "s3p://jvm-repository/snapshots/"
                                       :creds :gpg}
-                         "releases" {:url "s3p://jvm-repositoy/releases/"
+                         "releases" {:url "s3p://jvm-repository/releases/"
                                      :creds :gpg}]]
   :prep-tasks ["javac" "compile" "bower"]
   :ring {:handler procrastiversives.web/app}
