@@ -13,7 +13,8 @@
                  [clj-time "0.6.0"]]
   :profiles {:dev {:dependencies [[ring-server "0.3.0"]]
                    :source-paths ["src-dev"]}
-             :production {:env {:production true}}}
+             :production {:env {:production true}}
+             :uberjar {:aot :all}}
   :hooks [environ.leiningen.hooks]
   :plugins [[lein-ring "0.8.3"]
             [environ/environ.lein "0.2.1"]
@@ -27,7 +28,6 @@
                                      :creds :gpg}]]
   :prep-tasks ["javac" "compile" "bower"]
   :ring {:handler procrastiversives.web/app}
-  ;; :main procrastiversives.main
-  ;; :aot [procrastiversives.main]
+  :main procrastiversives.main
   :global-vars {*warn-on-reflection* true}
   :min-lein-version "2.0.0")
